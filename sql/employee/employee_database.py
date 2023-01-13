@@ -1,5 +1,5 @@
 import sqlite3
-conn = sqlite3.connect("sqlite.db")
+conn = sqlite3.connect(".\sql\employee\sqlite.db")
 conn.execute('''
 Create table employee1 (
     emp_id  text  PRIMARY KEY,
