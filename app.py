@@ -9,7 +9,8 @@ from slack_bolt.adapter.socket_mode import SocketModeHandler
 
 sys.path.append(os.path.abspath("./sql"))
 sys.path.append(os.path.abspath("./commands"))
-from employee.employee_update import update as employee_upd
+import employee
+import manager
 import commands
 
 load_dotenv()
@@ -25,14 +26,14 @@ form_progress = {}
 
 @app.event("message")
 def handle_message_events(message, logger, say):
-    text = message["text"]
+    text = message["text"].lower()
     channel = message['channel']
     if message["channel_type"] != "im":
         return
     user_id = message["user"]
 
     if(user_id in form_progress):
-        rep = form_progress[user_id].exec(message,logger)
+        rep = form_progress[user_id].exec(text,logger,form_progress)
         say(text=rep, channel=message['channel'])
         return
 
@@ -42,18 +43,26 @@ def handle_message_events(message, logger, say):
         return
 
     command = text[1:].lower()
+    if(re.match("help|help ",command)): commands.help.make_obj().exec(message,logger,re.split(' ',command)[1:])
     match command:
         case "joke":
             # joke = pyjokes.get_joke()
             ret = commands.joke.make_obj().exec(message,logger)
             # logger.info(f"Sent joke < {ret} > to user {user_id} in channel {dm_channel} with channel_type {channel_type}")
             say(text=ret, channel=channel)
+
+        case "leave":
+            mod = commands.leave.make_obj()
+            ret = mod.exec(message,logger,form_progress)
+            form_progress[user_id] = mod
+            say(text=ret, channel=channel)
         
-        case "update":
-            employee_upd(user_id,4)
+        case "help":
+            command = command
+            ret = commands
 
         case default:
-            say(text="Invalid command", channel=channel)
+            say(text="Invalid command\nUse . prefix to send commands\nTo view all commands use .help", channel=channel)
 
 
 def main():
