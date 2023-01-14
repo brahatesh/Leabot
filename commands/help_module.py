@@ -18,4 +18,4 @@ class help_module:
         # for help_fn in command:
 
 def make_obj():
-    return help_module
+    return help_module()

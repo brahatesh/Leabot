@@ -32,18 +32,23 @@ def handle_message_events(message, logger, say):
         return
     user_id = message["user"]
 
-    if(user_id in form_progress):
+    # print(form_progress)
+    if user_id in form_progress:
         rep = form_progress[user_id].exec(text,logger,form_progress)
         say(text=rep, channel=message['channel'])
         return
 
-    if(text[0]!="."): 
+    if text[0]!=".": 
         logger.info(f"Invalid command recieved < {message} > by {user_id}")
-        say(text="Invalid command\nUse . prefix to send commands\nTo view all commands use .help", channel=message["channel"])
+        say(text="Invalid command\nUse . prefix to send commands\nTo view all commands use .help", channel=channel)
         return
 
     command = text[1:].lower()
-    if(re.match("help|help ",command)): commands.help.make_obj().exec(message,logger,re.split(' ',command)[1:])
+    if re.match("help$",command) or re.match("help ",command): 
+        ret = commands.help.make_obj().exec(message,logger,re.split(' ',command)[1:])
+        say(text=ret, channel=channel)
+        return
+
     match command:
         case "joke":
             # joke = pyjokes.get_joke()
@@ -56,17 +61,17 @@ def handle_message_events(message, logger, say):
             ret = mod.exec(message,logger,form_progress)
             form_progress[user_id] = mod
             say(text=ret, channel=channel)
-        
-        case "help":
-            command = command
-            ret = commands
         case "leavehist":
             ret = commands.leave_history.make_obj().exec(message,logger)
             say(text=ret, channel=channel)
         case "nleaves":
             ret = commands.number_leaves.make_obj().exec(message,logger)
             say(text=ret, channel=channel)
-
+        case "register":
+            mod = commands.add_employee.make_obj()
+            ret = mod.exec(message,logger,form_progress)
+            if not re.match(".*reg.*",ret): form_progress[user_id] = mod
+            say(text=ret, channel=channel)
 
         case default:
             say(text="Invalid command\nUse . prefix to send commands\nTo view all commands use .help", channel=channel)

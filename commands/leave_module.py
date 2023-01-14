@@ -15,6 +15,7 @@ class leave_module:
             case 0:
                 self.emp_name,self.nleaves = employee.emp_retrieve(message['user'])
                 self.slack_id = message['user']
+                self.c_id = message['channel']
                 ret = f'''You have {self.nleaves} leaves left.
 What kind of leave do you want? [paid/sick]'''
                 self.stage+=1
@@ -44,7 +45,7 @@ What kind of leave do you want? [paid/sick]'''
             case 3:
                 self.id = uuid.uuid1()
                 ret = f"Your request has been sent.\nReference number: {self.id}"
-                manager.insert(str(self.id),self.slack_id,self.leave_type,self.nleaves,message,False)
+                manager.insert(str(self.id),self.slack_id,self.leave_type,self.nleaves,message,self.c_id,False)
                 del form_progress[self.slack_id]
                 return ret
 
