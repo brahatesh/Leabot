@@ -1,5 +1,15 @@
 import sqlite3
 ## inserting values in employee database
+def make_emp_db():
+    conn = sqlite3.connect(".\sql\employee.db")
+    conn.execute('''
+    Create table employee1 (
+        emp_id  text  PRIMARY KEY,
+        emp_name VARCHAR(50),
+        emp_leaves int
+    )
+    ''')
+    conn.close()
 def emp_insert(emp_id,emp_name,emp_leaves):
     conn = sqlite3.connect(".\sql\employee.db")
     params = (emp_id,emp_name,emp_leaves)
