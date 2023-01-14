@@ -42,6 +42,7 @@ def handle_message_events(message, logger, say):
         return
 
     command = text[1:].lower()
+    if(re.match("help|help ",command)): commands.help.make_obj().exec(message,logger,re.split(' ',command)[1:])
     match command:
         case "joke":
             # joke = pyjokes.get_joke()
@@ -49,11 +50,12 @@ def handle_message_events(message, logger, say):
             # logger.info(f"Sent joke < {ret} > to user {user_id} in channel {dm_channel} with channel_type {channel_type}")
             say(text=ret, channel=channel)
         
-        case "update":
-            employee_upd(user_id,4)
+        case "help":
+            command = command[]
+            ret = commands
 
         case default:
-            say(text="Invalid command", channel=channel)
+            say(text="Invalid command\nUse . prefix to send commands\nTo view all commands use .help", channel=channel)
 
 
 def main():
