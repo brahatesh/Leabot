@@ -11,12 +11,13 @@ class history_module_manager:
 
      def exec(self,message,logger,ref_id):
         ## here we are retrieving all leave history of an employee for the manager
-        leave_hist = manager.retrieve_ref(ref_id)
-        employee_fetch = employee.emp_retrieve(leave_hist[0][0])
+        emp_det = manager.retrieve_ref(ref_id)
+        employee_fetch = employee.emp_retrieve(emp_det[0])
+        leave_hist = manager.retrieve(emp_det[0])
         str = ""
         for obj in leave_hist:
             # print(obj)
-            str+=f"{employee_fetch[0]} has taken {obj[2]} {obj[1]} leave{'s' if obj[2]>1 else ''} due to {obj[3]}\n"
+            str+=f"{employee_fetch[0]} has taken {obj[1]} {obj[0]} leave{'s' if obj[1]>1 else ''} due to {obj[2]}\n"
 
         # logger.info(f"Sent string < {str} > to user {message['user']} in channel {message['channel']} with channel_type {message['channel_type']}")
         print(str)

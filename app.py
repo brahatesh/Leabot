@@ -22,10 +22,10 @@ app = App(token=SLACK_BOT_TOKEN, name="Joke Bot")
 logging.basicConfig(filename=".log", encoding="utf-8", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-if not os.path.exists('./sql/manager.db\n'):
+if not os.path.exists('./sql/manager.db'):
     manager.make_db()
 
-if not os.path.exists("./sql/employee.db\n"):
+if not os.path.exists("./sql/employee.db"):
     employee.make_emp_db()
 
 form_progress = {}
@@ -40,14 +40,17 @@ def handle_message_events(message, logger, say):
 
     # print(form_progress)
     if user_id in form_progress:
-        rep = form_progress[user_id].exec(text,logger,form_progress)
+        rep = form_progress[user_id].exec(text,logger,form_progress,say)
         say(text=rep, channel=message['channel'])
         return
 
     if text[0]!=".": 
         if user_id == "U04JMH6NV7Y":
             ret = commands.pl_manager.make_obj().exec(message,logger,say)
-            if not ret: return
+            # print(ret)
+            if ret: 
+                say(text=ret, channel=channel)
+                return
             logger.info(f"Invalid command recieved < {message} > by {user_id}")
             ret = "Invalid command\nUse . prefix to send commands\nTo view all commands use .help"
         say(text=ret, channel=channel)

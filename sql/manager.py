@@ -49,7 +49,7 @@ def retrieve_ref(ref_id):
     leave_info = conn.execute(f'''
     select employee_id,type,no_of_leaves,reason,channel_id,flag from manager where ref_id=(?)
     ''', (ref_id,))
-    leave_info = leave_info.fetchall()
+    leave_info = leave_info.fetchone()
     conn.commit()
     conn.close()
     return leave_info

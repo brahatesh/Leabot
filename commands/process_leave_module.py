@@ -20,7 +20,8 @@ class process_leave_module:
             return "Invalid reference ID"
         match args[1]:
             case "a":
-                emp_id,_,no_leaves,_,c_id,_ = manager.retrieve_ref(args[1])[3]
+                # print(args)
+                emp_id,_,no_leaves,_,c_id,_ = manager.retrieve_ref(args[0])
                 if no_leaves > employee.emp_retrieve(emp_id)[1]:
                     say(text=f"Your leave with reference ID {args[0]} has been rejected due to error\n<no_of_days_applied> > <no_of_days_available>", channel=c_id)
                     manager.delete_ref(args[0])
@@ -30,13 +31,13 @@ class process_leave_module:
                 return f"{args[0]} accepted"
             
             case "r":
-                c_id = manager.retrieve_ref(args[0])[3]
+                c_id = manager.retrieve_ref(args[0])[4]
                 say(text=f"Your leave with reference ID {args[0]} has been rejected", channel=c_id)
                 manager.delete_ref(args[0])
                 return f"{args[0]} rejected"
 
             case "view":
-                return leave_history_manager.make_obj().exec(_,logger,args[0])
+                return leave_history_manager.make_obj().exec(message,logger,args[0])
             
             case default:
                 return f"Invalid argument provided for reference ID {args[0]}"
