@@ -1,5 +1,5 @@
 import sqlite3
-
+## inserting values in employee database
 def emp_insert(emp_id,emp_name,emp_leaves):
     conn = sqlite3.connect(".\sql\employee.db")
     params = (emp_id,emp_name,emp_leaves)
@@ -14,6 +14,7 @@ def emp_insert(emp_id,emp_name,emp_leaves):
     conn.commit()
     conn.close()
 
+## updating values in employee database
 def emp_update(emp_id,no_of_leaves):
     conn = sqlite3.connect(".\sql\employee.db",check_same_thread=False)
     curr_leave = conn.execute( f'''
@@ -29,7 +30,7 @@ def emp_update(emp_id,no_of_leaves):
 
     conn.commit()
     conn.close()
-
+## retrieving value from employee database
 def emp_retrieve(emp_id):
      conn = sqlite3.connect(".\sql\employee.db",check_same_thread=False)
      emp_inf =conn.execute( f'''
