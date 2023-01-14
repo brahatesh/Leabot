@@ -68,4 +68,10 @@ def mutate(ref_id,accepted):
     conn.commit()
     conn.close()
 
-
+def update_leaves(ref_id,new_leaves):
+    conn = sqlite3.connect("./sql/manager.db",check_same_thread=False)
+    conn.execute( f'''
+            update manager set no_of_leaves=(?) where ref_id=(?)
+        ''',(new_leaves,ref_id,))      
+    conn.commit()
+    conn.close()
