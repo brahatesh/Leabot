@@ -26,6 +26,7 @@ class process_leave_module:
                     say(text=f"Your leave with reference ID {args[0]} has been rejected due to error\n<no_of_days_applied> > <no_of_days_available>", channel=c_id)
                     manager.delete_ref(args[0])
                     return f"{args[0]} rejected because <no_of_days_applied> > <no_of_days_available"
+                employee.emp_update(emp_id,no_leaves)
                 say(text=f"Your leave with reference ID {args[0]} has been accepted", channel=c_id)
                 manager.mutate(args[0], True)
                 return f"{args[0]} accepted"

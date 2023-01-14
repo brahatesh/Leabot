@@ -48,6 +48,7 @@ What kind of leave do you want? [paid/sick]'''
                 man = f'''Application for leave
 Name: {self.emp_name}
 No of days: {self.nleaves}
+Reason: {message}
 Reference ID: {self.id}
 Respond with {self.id} a/r/view [Refer help for details]'''
                 say(text=man,channel="U04JMH6NV7Y")

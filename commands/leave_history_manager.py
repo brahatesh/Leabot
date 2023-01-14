@@ -20,7 +20,7 @@ class history_module_manager:
             str+=f"{employee_fetch[0]} has taken {obj[1]} {obj[0]} leave{'s' if obj[1]>1 else ''} due to {obj[2]}\n"
 
         # logger.info(f"Sent string < {str} > to user {message['user']} in channel {message['channel']} with channel_type {message['channel_type']}")
-        print(str)
+        # print(str)
         return str
 # message = {'user':'U04JMH6NV7Y'}
 # mod = history_module().exec(message,0)
