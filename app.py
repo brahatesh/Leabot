@@ -32,6 +32,7 @@ def handle_message_events(message, logger, say):
         return
     user_id = message["user"]
 
+    # print(form_progress)
     if user_id in form_progress:
         rep = form_progress[user_id].exec(text,logger,form_progress)
         say(text=rep, channel=message['channel'])
@@ -69,6 +70,11 @@ def handle_message_events(message, logger, say):
             say(text=ret, channel=channel)
         case "nleaves":
             ret = commands.number_leaves.make_obj().exec(message,logger)
+            say(text=ret, channel=channel)
+        case "register":
+            mod = commands.add_employee.make_obj()
+            ret = mod.exec(message,logger,form_progress)
+            if not re.match(".*reg.*",ret): form_progress[user_id] = mod
             say(text=ret, channel=channel)
 
         case default:
