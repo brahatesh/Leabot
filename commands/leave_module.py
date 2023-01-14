@@ -10,7 +10,7 @@ class leave_module:
     def __init__(self):
         self.stage = 0
     
-    def exec(self,message,logger,form_progress):
+    def exec(self,message,logger,form_progress,say):
         match self.stage:
             case 0:
                 self.emp_name,self.nleaves = employee.emp_retrieve(message['user'])
@@ -45,6 +45,12 @@ What kind of leave do you want? [paid/sick]'''
             case 3:
                 self.id = uuid.uuid1()
                 ret = f"Your request has been sent.\nReference number: {self.id}"
+                man = f'''Application for leave
+                Name: {self.emp_name}
+                No of days: {self.nleaves}
+                Reference ID: {self.id}
+                Respond with {self.id} a/r/view [Refer help for details]'''
+                say(text=man,channel="U04JMH6NV7Y")
                 manager.insert(str(self.id),self.slack_id,self.leave_type,self.nleaves,message,self.c_id,False)
                 del form_progress[self.slack_id]
                 return ret

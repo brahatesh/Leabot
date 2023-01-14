@@ -46,8 +46,8 @@ def handle_message_events(message, logger, say):
 
     if text[0]!=".": 
         if user_id == "U04JMH6NV7Y":
-            ret = ""
-        else:
+            ret = commands.pl_manager.make_obj().exec(message,logger,say)
+            if not ret: return
             logger.info(f"Invalid command recieved < {message} > by {user_id}")
             ret = "Invalid command\nUse . prefix to send commands\nTo view all commands use .help"
         say(text=ret, channel=channel)
@@ -56,7 +56,7 @@ def handle_message_events(message, logger, say):
     command = text[1:].lower()
     if re.match("help$",command) or re.match("help ",command): 
         ret = commands.help.make_obj().exec(message,logger,re.split(' ',command)[1:])
-        if not ret: say(text=ret, channel=channel)
+        say(text=ret, channel=channel)
         return
 
     match command:
@@ -68,15 +68,18 @@ def handle_message_events(message, logger, say):
 
         case "leave":
             mod = commands.leave.make_obj()
-            ret = mod.exec(message,logger,form_progress)
+            ret = mod.exec(message,logger,form_progress,say)
             form_progress[user_id] = mod
             say(text=ret, channel=channel)
+
         case "leavehist":
             ret = commands.leave_history.make_obj().exec(message,logger)
             say(text=ret, channel=channel)
+
         case "nleaves":
             ret = commands.number_leaves.make_obj().exec(message,logger)
             say(text=ret, channel=channel)
+
         case "register":
             mod = commands.add_employee.make_obj()
             ret = mod.exec(message,logger,form_progress)
