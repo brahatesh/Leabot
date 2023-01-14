@@ -43,7 +43,7 @@ def retrieve(emp_id):
 def retrieve_ref(ref_id):
     conn = sqlite3.connect("./sql/manager.db",check_same_thread=False)
     leave_info = conn.execute( f'''
-    select type,no_of_leaves,reason,channel_id,flag from manager where ref_id=(?)
+    select employee_id,type,no_of_leaves,reason,channel_id,flag from manager where ref_id=(?)
     ''',(ref_id,))
     leave_info = leave_info.fetchall()
     conn.commit()
@@ -68,4 +68,10 @@ def mutate(ref_id,accepted):
     conn.commit()
     conn.close()
 
-
+def update_leaves(ref_id,new_leaves):
+    conn = sqlite3.connect("./sql/manager.db",check_same_thread=False)
+    conn.execute( f'''
+            update manager set no_of_leaves=(?) where ref_id=(?)
+        ''',(new_leaves,ref_id,))      
+    conn.commit()
+    conn.close()
