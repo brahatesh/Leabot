@@ -1,0 +1,4 @@
+slack-bolt
+slack-sdk
+python_dotenv
+pyjokes
