@@ -50,7 +50,7 @@ def handle_message_events(message, logger, say):
     command = text[1:].lower()
     if re.match("help$",command) or re.match("help ",command): 
         ret = commands.help.make_obj().exec(message,logger,re.split(' ',command)[1:])
-        say(text=ret, channel=channel)
+        if not ret: say(text=ret, channel=channel)
         return
 
     match command:
