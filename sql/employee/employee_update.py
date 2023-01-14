@@ -14,3 +14,4 @@ def update(emp_id,no_of_leaves):
     conn.commit()
     conn.close()
 
+update("U04JMH6NV7Y",6)

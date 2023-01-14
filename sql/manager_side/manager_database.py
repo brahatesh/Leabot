@@ -1,12 +1,12 @@
 import sqlite3
-conn = sqlite3.connect("sqlite.db")
+conn = sqlite3.connect("./sql/manager_side/sqlite.db")
 
 conn.execute('''
 Create table manager (
-    ref_id VARCHAR(100),
-    employee_id VARCHAR(100),
+    ref_id VARCHAR(100) PRIMARY KEY,
+    employee_id text,
     type VARCHAR(100),
-    days_no INT,
+    no_of_leaves INT,
     reason VARCHAR(200)
 )
 ''')
