@@ -51,4 +51,21 @@ def retrieve_ref(ref_id):
     return leave_info
 
 
+def delete_ref(ref_id):
+    conn = sqlite3.connect("./sql/manager.db",check_same_thread=False)
+    conn.execute( f'''
+    DELETE FROM manager WHERE ref_id=(?)
+    ''',(ref_id,))
+    conn.commit()
+    conn.close()
+
+def mutate(ref_id,accepted):
+    conn = sqlite3.connect("./sql/manager.db",check_same_thread=False)
+    if(accepted):
+        conn.execute( f'''
+            update manager set flag=1 where ref_id=(?)
+        ''',(ref_id,))
+    conn.commit()
+    conn.close()
+
 
