@@ -38,8 +38,12 @@ def handle_message_events(message, logger, say):
         return
 
     if text[0]!=".": 
-        logger.info(f"Invalid command recieved < {message} > by {user_id}")
-        say(text="Invalid command\nUse . prefix to send commands\nTo view all commands use .help", channel=channel)
+        if user_id == "U04JMH6NV7Y":
+            ret = ""
+        else:
+            logger.info(f"Invalid command recieved < {message} > by {user_id}")
+            ret = "Invalid command\nUse . prefix to send commands\nTo view all commands use .help"
+        say(text=ret, channel=channel)
         return
 
     command = text[1:].lower()
