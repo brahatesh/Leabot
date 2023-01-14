@@ -13,6 +13,3 @@ def insert(emp_id,emp_name,emp_leaves):
     ''',params)
     conn.commit()
     conn.close()
-
-
-insert("U04JMH6NV7Y","Brahatesh",18)
