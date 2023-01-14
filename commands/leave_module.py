@@ -44,7 +44,7 @@ What kind of leave do you want? [paid/sick]'''
             case 3:
                 self.id = uuid.uuid1()
                 ret = f"Your request has been sent.\nReference number: {self.id}"
-                manager.insert(str(self.id),self.slack_id,self.leave_type,self.nleaves,message)
+                manager.insert(str(self.id),self.slack_id,self.leave_type,self.nleaves,message,False)
                 del form_progress[self.slack_id]
                 return ret
 
