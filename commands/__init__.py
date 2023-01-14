@@ -3,3 +3,4 @@ import help_module as help
 import leave_module as leave
 import leave_history_module as leave_history
 import nleaves as number_leaves
+import employee_insert_module as add_employee

@@ -43,7 +43,7 @@ def retrieve(emp_id):
 def retrieve_ref(ref_id):
     conn = sqlite3.connect("./sql/manager.db",check_same_thread=False)
     leave_info = conn.execute( f'''
-    select type,no_of_leaves,reason,channel_id,flag from manager where ref_id=(?)
+    select employee_id,type,no_of_leaves,reason,channel_id,flag from manager where ref_id=(?)
     ''',(ref_id,))
     leave_info = leave_info.fetchall()
     conn.commit()
