@@ -9,5 +9,3 @@ def retrieve(ref_id):
     print (leave_info)
     conn.commit()
     conn.close()
-
-retrieve("123")
