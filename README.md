@@ -7,7 +7,7 @@ pip -r install requirements.txt
 ```
 To start the app (backend for the bot), run the following command:
 ```bash
-python ap.py
+python app.py
 ```
 
 After adding the bot first, use '.help' to see a list of commands and to see help for a particular command, use the command '.help <command>'.
