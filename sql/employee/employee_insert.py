@@ -1,5 +1,5 @@
 import sqlite3
-conn = sqlite3.connect("sqlite.db")
+conn = sqlite3.connect(".\sql\employee\sqlite.db")
 
 def insert(emp_id,emp_name,emp_leaves):
     params = (emp_id,emp_name,emp_leaves)
