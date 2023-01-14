@@ -6,7 +6,7 @@ class nleaves:
         
     def exec(self,message,logger):
         reply=""
-        conn = sqlite3.connect("..\sql\employee.db",check_same_thread=False)
+        conn = sqlite3.connect(".\sql\employee.db",check_same_thread=False)
         emp_id=message['user']
         leaves_remaining =conn.execute( f'''
         select emp_leaves from employee1 where emp_id=(?)
@@ -22,8 +22,8 @@ class nleaves:
         return reply
 
 
-    def make_obj():
-        return nleaves()
+def make_obj():
+    return nleaves()
 
 # message={'user':"U04JMH6NV7Y"}
 # mod=nleaves().exec(message,0)

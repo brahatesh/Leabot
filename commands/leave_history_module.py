@@ -13,6 +13,7 @@ class history_module:
         leave_hist = manager.retrieve(message['user'])
         str = ""
         for obj in leave_hist:
+            # print(obj)
             str+=f"You have taken {obj[1]} {obj[0]} leave{'s' if obj[1]>1 else ''} due to {obj[2]}\n"
 
         logger.info(f"Sent string < {str} > to user {message['user']} in channel {message['channel']} with channel_type {message['channel_type']}")

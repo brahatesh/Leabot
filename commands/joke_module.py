@@ -10,4 +10,4 @@ class joke_module:
         return joke
 
 def make_obj():
-    return joke_module
+    return joke_module()

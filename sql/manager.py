@@ -25,12 +25,12 @@ def insert(ref_id,employee_id,type,no_of_leaves,reason):
     conn.close()
 
 # Function for retrieving data using ref_id as parameter
-def retrieve(ref_id):
+def retrieve(emp_id):
     conn = sqlite3.connect("./sql/manager.db",check_same_thread=False)
     leave_info = conn.execute( f'''
-    select employee_id,type,no_of_leaves,reason from manager where ref_id=(?)
-    ''',(ref_id,))
-    leave_info = leave_info.fetchone()
-    print (leave_info)
+    select type,no_of_leaves,reason from manager where employee_id=(?)
+    ''',(emp_id,))
+    leave_info = leave_info.fetchall()
     conn.commit()
     conn.close()
+    return leave_info

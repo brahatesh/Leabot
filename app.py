@@ -39,7 +39,7 @@ def handle_message_events(message, logger, say):
 
     if(text[0]!="."): 
         logger.info(f"Invalid command recieved < {message} > by {user_id}")
-        say(text="Invalid command", channel=message["channel"])
+        say(text="Invalid command\nUse . prefix to send commands\nTo view all commands use .help", channel=message["channel"])
         return
 
     command = text[1:].lower()
@@ -60,6 +60,13 @@ def handle_message_events(message, logger, say):
         case "help":
             command = command
             ret = commands
+        case "leavehist":
+            ret = commands.leave_history.make_obj().exec(message,logger)
+            say(text=ret, channel=channel)
+        case "nleaves":
+            ret = commands.number_leaves.make_obj().exec(message,logger)
+            say(text=ret, channel=channel)
+
 
         case default:
             say(text="Invalid command\nUse . prefix to send commands\nTo view all commands use .help", channel=channel)

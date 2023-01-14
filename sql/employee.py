@@ -42,4 +42,5 @@ def emp_retrieve(emp_id):
      conn.close()
      return emp_inf
 
-# emp_insert("U04JMH6NV7Y","Brahatesh",18)
+
+
