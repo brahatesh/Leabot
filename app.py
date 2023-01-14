@@ -22,6 +22,12 @@ app = App(token=SLACK_BOT_TOKEN, name="Joke Bot")
 logging.basicConfig(filename=".log", encoding="utf-8", level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
+if not os.path.exists("./sql/manager.db"):
+    manager.make_db()
+
+if not os.path.exists("./sql/employee.db"):
+    employee.make_emp_db()
+
 form_progress = {}
 
 @app.event("message")
