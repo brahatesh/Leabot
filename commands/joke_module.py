@@ -2,7 +2,7 @@ import pyjokes
 
 class joke_module:
     def __init__(self):
-        stage = 0
+        self.stage = 0
     
     def exec(self,message,logger):
         joke = pyjokes.get_joke()

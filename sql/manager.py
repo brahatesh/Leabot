@@ -16,7 +16,6 @@ def make_db():
 ''')
     conn.close()
 
-
 # Inserting data in manager database
 def insert(ref_id, employee_id, type, no_of_leaves, reason, c_id, flag):
     conn = sqlite3.connect("./sql/manager.db")
@@ -29,8 +28,6 @@ def insert(ref_id, employee_id, type, no_of_leaves, reason, c_id, flag):
     conn.close()
 
 # Function for retrieving data using emp_id as parameter
-
-
 def retrieve(emp_id):
     conn = sqlite3.connect("./sql/manager.db", check_same_thread=False)
     leave_info = conn.execute(f'''
@@ -42,8 +39,6 @@ def retrieve(emp_id):
     return leave_info
 
 # Function for retrieving data using ref_id as parameter
-
-
 def retrieve_ref(ref_id):
     conn = sqlite3.connect("./sql/manager.db", check_same_thread=False)
     leave_info = conn.execute(f'''
@@ -54,7 +49,6 @@ def retrieve_ref(ref_id):
     conn.close()
     return leave_info
 
-
 def delete_ref(ref_id):
     conn = sqlite3.connect("./sql/manager.db", check_same_thread=False)
     conn.execute(f'''
@@ -63,16 +57,14 @@ def delete_ref(ref_id):
     conn.commit()
     conn.close()
 
-
 def mutate(ref_id, accepted):
     conn = sqlite3.connect("./sql/manager.db", check_same_thread=False)
-    if(accepted):
+    if (accepted):
         conn.execute(f'''
             update manager set flag=1 where ref_id=(?)
         ''', (ref_id,))
     conn.commit()
     conn.close()
-
 
 def update_leaves(ref_id, new_leaves):
     conn = sqlite3.connect("./sql/manager.db", check_same_thread=False)
